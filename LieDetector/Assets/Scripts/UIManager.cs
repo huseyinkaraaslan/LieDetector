@@ -1,15 +1,16 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("UI Elements")]
+    public Image characterImage;
     public TextMeshProUGUI sentenceText;
     public Button truthButton;
     public Button lieButton;
-    public Image characterImage;
 
     private void Awake()
     {
@@ -22,9 +23,9 @@ public class UIManager : MonoBehaviour
         sentenceText.text = sentence;
     }
 
-    public void SetCharacter(Sprite face)
+    public void SetCharacter(Sprite characterSprite)
     {
-        characterImage.sprite = face;
+        characterImage.sprite = characterSprite;
     }
 
     public void SetButtonsEnabled(bool enabled)
