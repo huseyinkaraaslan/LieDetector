@@ -31,9 +31,13 @@ public class GameManager : MonoBehaviour
     {
         resultPanel.SetActive(false);
 
-        // Geçici data
         string[] statements = {
             "Ben 3 yaşında Harvard'a girdim.",
+            "sasa",
+            "selammm",
+            "1",
+            "2",
+            "3",
             "Ben sabahları balıkla konuşurum.",
             "Kedim piyano çalıyor."
         };

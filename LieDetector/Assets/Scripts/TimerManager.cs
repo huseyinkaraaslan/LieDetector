@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class TimerManager : MonoBehaviour
     public float timePerRound = 10f;
     private float currentTime;
 
-    public Text timerText;
+    public TextMeshProUGUI timerText;
 
     private bool isRunning = false;
 
