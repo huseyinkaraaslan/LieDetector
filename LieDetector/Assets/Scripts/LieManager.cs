@@ -15,6 +15,7 @@ public class LieManager : MonoBehaviour
 
     public Statement[] statements;
     private Statement currentStatement;
+    private int index = 0;
 
     private void Awake()
     {
@@ -29,7 +30,6 @@ public class LieManager : MonoBehaviour
 
     public void StartNewRound()
     {
-        int index = Random.Range(0, statements.Length);
         currentStatement = statements[index];
 
         UIManager.Instance.SetSentence(currentStatement.sentence);
@@ -37,6 +37,8 @@ public class LieManager : MonoBehaviour
         UIManager.Instance.SetButtonsEnabled(true);
 
         TimerManager.Instance.StartTimer();
+
+        index++;
     }
 
     public void PlayerChose(bool choseTruth)
@@ -72,5 +74,13 @@ public class LieManager : MonoBehaviour
     public void OnLieButton()
     {
         PlayerChose(false);
+    }
+
+    public void TimeUp()
+    {
+        UIManager.Instance.SetButtonsEnabled(false);
+        UIManager.Instance.SetCharacter(currentStatement.reactionFace);
+        Invoke(nameof(StartNewRound), 2f);
+        Debug.Log("Timeout");
     }
 }

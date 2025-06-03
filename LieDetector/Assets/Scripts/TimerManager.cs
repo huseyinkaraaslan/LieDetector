@@ -54,10 +54,7 @@ public class TimerManager : MonoBehaviour
 
     private void TimeOut()
     {
-        Debug.Log("Süre doldu!");
         UIManager.Instance.SetButtonsEnabled(false);
-
-        // Zaman dolduğunda oyuncu cevap vermemiş sayılır
-        LieManager.Instance.PlayerChose(false); // Örnek olarak otomatik yanlış seçildi
+        LieManager.Instance.TimeUp();
     }
 }
