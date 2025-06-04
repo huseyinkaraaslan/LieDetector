@@ -21,7 +21,7 @@ public class TimerManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isRunning) return;
+        if (!isRunning || !(UIManager.Instance.gameScreen.activeSelf)) return;
 
         currentTime -= Time.deltaTime;
         UpdateTimerUI();

@@ -25,7 +25,10 @@ public class LieManager : MonoBehaviour
 
     private void Start()
     {
-        StartNewRound();
+        if (index != statements.Length)
+            StartNewRound();            
+        else
+            Invoke(nameof(UIManager.Instance.BackToMainMenu), 2f);
     }
 
     public void StartNewRound()
@@ -39,7 +42,7 @@ public class LieManager : MonoBehaviour
 
         TimerManager.Instance.StartTimer();
 
-        index++;
+        index = Mathf.Min(index + 1, statements.Length);
     }
 
     public void PlayerChose(bool choseTruth)
@@ -47,6 +50,10 @@ public class LieManager : MonoBehaviour
         TimerManager.Instance.StopTimer();
         UIManager.Instance.SetButtonsEnabled(false);
 
+        if (index == statements.Length)
+        {
+            Invoke(nameof(UIManager.Instance.BackToMainMenu),2f);
+        }
         bool correct = (choseTruth == currentStatement.isTruth);
         string resultAnswer;
 

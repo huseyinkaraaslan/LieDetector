@@ -8,15 +8,20 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject resultScreen;
+    public GameObject mainMenuScreen;
+    public GameObject gameScreen;
     public Image characterImage;
     public TextMeshProUGUI sentenceText;
-    public Button truthButton;
-    public Button lieButton;
+    public Button truthButton, lieButton, playButton;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+        SetMainMenuScreen(true);
+        SetResultScreen(false, "");
+        SetGameScreen(false);
     }
 
     public void SetSentence(string sentence)
@@ -35,9 +40,32 @@ public class UIManager : MonoBehaviour
         lieButton.interactable = enabled;
     }
 
+    public void SetMainMenuScreen(bool isActive)
+    {
+        mainMenuScreen.SetActive(isActive);
+    }
+
+    public void SetGameScreen(bool isActive)
+    {
+        gameScreen.SetActive(isActive);
+    }
+
     public void SetResultScreen(bool isActive, string resultText)
     {
         resultScreen.SetActive(isActive);
         resultScreen.GetComponentInChildren<TextMeshProUGUI>().text = resultText;
+    }
+
+    public void OnPlayPressed()
+    {
+        SetMainMenuScreen(false);
+        SetResultScreen(false, "");
+        SetGameScreen(true);
+    }
+    public void BackToMainMenu()
+    {
+        mainMenuScreen.SetActive(true);
+        gameScreen.SetActive(false);
+        resultScreen.SetActive(false);
     }
 }
