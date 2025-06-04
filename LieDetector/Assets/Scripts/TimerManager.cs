@@ -55,6 +55,8 @@ public class TimerManager : MonoBehaviour
     private void TimeOut()
     {
         UIManager.Instance.SetButtonsEnabled(false);
-        LieManager.Instance.TimeUp();
+        UIManager.Instance.SetCharacter(LieManager.Instance.currentStatement.reactionFace);
+        LieManager.Instance.InvokeNewRound(2f);
+        Debug.Log("Timeout");  
     }
 }

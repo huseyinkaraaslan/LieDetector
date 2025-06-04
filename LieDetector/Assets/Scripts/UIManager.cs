@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [Header("UI Elements")]
+    public GameObject resultScreen;
     public Image characterImage;
     public TextMeshProUGUI sentenceText;
     public Button truthButton;
@@ -32,5 +33,11 @@ public class UIManager : MonoBehaviour
     {
         truthButton.interactable = enabled;
         lieButton.interactable = enabled;
+    }
+
+    public void SetResultScreen(bool isActive, string resultText)
+    {
+        resultScreen.SetActive(isActive);
+        resultScreen.GetComponentInChildren<Text>().text = resultText;
     }
 }

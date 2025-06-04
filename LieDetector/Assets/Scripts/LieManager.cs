@@ -14,7 +14,7 @@ public class LieManager : MonoBehaviour
     }
 
     public Statement[] statements;
-    private Statement currentStatement;
+    public Statement currentStatement;
     private int index = 0;
 
     private void Awake()
@@ -76,11 +76,8 @@ public class LieManager : MonoBehaviour
         PlayerChose(false);
     }
 
-    public void TimeUp()
-    {
-        UIManager.Instance.SetButtonsEnabled(false);
-        UIManager.Instance.SetCharacter(currentStatement.reactionFace);
-        Invoke(nameof(StartNewRound), 2f);
-        Debug.Log("Timeout");
+    public void InvokeNewRound(float timeInvoke)
+    {        
+        Invoke(nameof(StartNewRound), timeInvoke);     
     }
 }
