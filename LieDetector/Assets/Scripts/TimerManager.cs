@@ -56,6 +56,7 @@ public class TimerManager : MonoBehaviour
     {
         UIManager.Instance.SetButtonsEnabled(false);
         UIManager.Instance.SetCharacter(LieManager.Instance.currentStatement.reactionFace);
+        UIManager.Instance.SetResultScreen(true,"Time Is Up");
         LieManager.Instance.InvokeNewRound(2f);
         Debug.Log("Timeout");  
     }

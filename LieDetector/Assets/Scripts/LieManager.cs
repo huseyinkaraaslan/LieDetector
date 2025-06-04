@@ -30,6 +30,7 @@ public class LieManager : MonoBehaviour
 
     public void StartNewRound()
     {
+        UIManager.Instance.SetResultScreen(false, "");
         currentStatement = statements[index];
 
         UIManager.Instance.SetSentence(currentStatement.sentence);
@@ -47,19 +48,21 @@ public class LieManager : MonoBehaviour
         UIManager.Instance.SetButtonsEnabled(false);
 
         bool correct = (choseTruth == currentStatement.isTruth);
+        string resultAnswer;
 
         if (correct)
         {
-            Debug.Log("Doğru tahmin!");
             ScoreManager.Instance.AddScore(10);
+            resultAnswer = "Correct Answer";
+            Debug.Log("Doğru tahmin!");
         }
         else
         {
+            resultAnswer = "Wrong Answer";
             Debug.Log("YANLIŞ tahmin!");
-            // İstersen burada ceza puanı vs. uygula
         }
 
-        // Tepki yüzü göster
+        UIManager.Instance.SetResultScreen(true, resultAnswer);
         UIManager.Instance.SetCharacter(currentStatement.reactionFace);
 
         // Yeni turu başlat

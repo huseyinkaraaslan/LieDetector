@@ -38,6 +38,6 @@ public class UIManager : MonoBehaviour
     public void SetResultScreen(bool isActive, string resultText)
     {
         resultScreen.SetActive(isActive);
-        resultScreen.GetComponentInChildren<Text>().text = resultText;
+        resultScreen.GetComponentInChildren<TextMeshProUGUI>().text = resultText;
     }
 }
