@@ -8,6 +8,10 @@ public class GameOverAnimator : MonoBehaviour
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI scoreText;
 
+    public AudioSource audioSource;
+    public AudioClip countSound;   
+    public AudioClip finalDing;  
+
     private void Awake()
     {
         canvasGroup.alpha = 0f;
@@ -39,14 +43,28 @@ public class GameOverAnimator : MonoBehaviour
         float duration = 1.5f;
         float elapsed = 0f;
 
+        audioSource.clip = countSound;
+        audioSource.loop = true;
+        audioSource.Play();
+
         while (displayScore < finalScore)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            displayScore = Mathf.RoundToInt(Mathf.Lerp(0, finalScore, t));
-            scoreText.text = "Score: " + displayScore.ToString();
+            int newDisplay = Mathf.RoundToInt(Mathf.Lerp(0, finalScore, t));
+
+            if (newDisplay > displayScore)
+            {
+                displayScore = newDisplay;
+                scoreText.text = "Score: " + displayScore.ToString();
+            }
+
             yield return null;
         }
+
+        audioSource.Stop();
+        audioSource.loop = false;
+        audioSource.PlayOneShot(finalDing);
 
         scoreText.text = "Score: " + finalScore.ToString();
     }
