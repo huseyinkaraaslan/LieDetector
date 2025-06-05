@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    public GameOverAnimator gameOverAnimator;
 
     [Header("UI Elements")]
     public GameObject resultScreen;
     public GameObject mainMenuScreen;
+    public GameObject endOfChapterScreen;
     public GameObject gameScreen;
     public Image characterImage;
     public TextMeshProUGUI sentenceText;
+    public TextMeshProUGUI finalScoreText;
     public Button truthButton, lieButton, playButton;
 
     private void Awake()
@@ -19,9 +23,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        SetMainMenuScreen(true);
-        SetResultScreen(false, "");
-        SetGameScreen(false);
+        ShowMainMenu();
     }
 
     public void SetSentence(string sentence)
@@ -40,16 +42,6 @@ public class UIManager : MonoBehaviour
         lieButton.interactable = enabled;
     }
 
-    public void SetMainMenuScreen(bool isActive)
-    {
-        mainMenuScreen.SetActive(isActive);
-    }
-
-    public void SetGameScreen(bool isActive)
-    {
-        gameScreen.SetActive(isActive);
-    }
-
     public void SetResultScreen(bool isActive, string resultText)
     {
         resultScreen.SetActive(isActive);
@@ -58,14 +50,33 @@ public class UIManager : MonoBehaviour
 
     public void OnPlayPressed()
     {
-        SetMainMenuScreen(false);
-        SetResultScreen(false, "");
-        SetGameScreen(true);
+        mainMenuScreen.SetActive(false);
+        resultScreen.SetActive(false);
+        endOfChapterScreen.SetActive(false);
+        gameScreen.SetActive(true);
     }
-    public void BackToMainMenu()
+
+    public void OnPlayRetry()
+    {
+        mainMenuScreen.SetActive(false);
+        resultScreen.SetActive(false);
+        endOfChapterScreen.SetActive(false);
+        gameScreen.SetActive(true);
+        ScoreManager.Instance.ResetScore();
+    }
+
+    public void ShowMainMenu()
     {
         mainMenuScreen.SetActive(true);
         gameScreen.SetActive(false);
         resultScreen.SetActive(false);
+        endOfChapterScreen.SetActive(false);
     }
+
+    public void ShowGameOver()
+    {
+        gameScreen.SetActive(false);
+        endOfChapterScreen.SetActive(true);
+        gameOverAnimator.ShowGameOver(ScoreManager.Instance.score);        
+    }      
 }
