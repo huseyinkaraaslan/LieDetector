@@ -26,6 +26,27 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreUI();
     }
 
+    public int GetCurrentScore()
+    {
+        return score;
+    }
+
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    public void CheckForHighScore()
+    {
+        int highScore = GetHighScore();
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+            Debug.Log("New High Score!");
+        }
+    }
+
     public void ResetScore()
     {
         score = 0;
