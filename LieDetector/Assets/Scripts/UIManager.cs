@@ -71,10 +71,12 @@ public class UIManager : MonoBehaviour
         gameScreen.SetActive(false);
         resultScreen.SetActive(false);
         endOfChapterScreen.SetActive(false);
+        ScoreManager.Instance.ResetScore();
     }
 
     public void ShowGameOver()
     {
+        finalScoreText.text = "Score: 0";
         gameScreen.SetActive(false);
         endOfChapterScreen.SetActive(true);
         gameOverAnimator.ShowGameOver(ScoreManager.Instance.score);        
